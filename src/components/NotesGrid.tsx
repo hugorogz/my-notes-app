@@ -6,7 +6,8 @@ import {
   Card, 
   CardActions, 
   CardContent, 
-  Typography 
+  Typography, 
+  CardHeader
 } from '@mui/material';
 import styles from '../styles/NotesGrid.module.scss';
 
@@ -30,9 +31,13 @@ const NotesGrid = React.memo(({ notes, handleEdit, handleDelete, editNoteId }: N
                     className={styles.noteCard}
                 >
                     <CardContent className={styles.noteContent}>
-                        <Typography variant="h6">
+                        {/* <Typography variant="h6">
                             {note.title}
-                        </Typography>
+                        </Typography> */}
+                        <CardHeader
+                            title={note.title}
+                            subheader={new Date(note.created_at).toLocaleString()}
+                        />
                         <Typography 
                             component="div" 
                             dangerouslySetInnerHTML={{ __html: note.description }} 

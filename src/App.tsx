@@ -31,7 +31,8 @@ function App() {
       const newlyCreatedNote: Note = {
         id: uuidv4(), // use uuid library to create unique ids, pretty wide-used in industry
         title,
-        description
+        description,
+        created_at: new Date().toISOString(),
       }
 
       setNotes((prev) => [...prev, newlyCreatedNote])
@@ -70,7 +71,9 @@ function App() {
       />
 
       <NotesGrid 
-        notes={notes} 
+        notes={notes.sort((a,b) => {// display notes sorted from most recent to oldest
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        })} 
         handleEdit={handleEdit} 
         handleDelete={handleDelete} 
         editNoteId={editNoteId}
