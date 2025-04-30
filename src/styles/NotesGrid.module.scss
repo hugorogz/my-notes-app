@@ -1,0 +1,27 @@
+.notesContainer {
+    margin: 5%;
+    padding: 3%;
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+.noteCard {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.noteContent {
+    max-height: 200px;
+    overflow: hidden;
+
+    .description {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Used 
+- `"@mui/material": "^7.0.2"` for Styled elements and Grid for Notes https://mui.com/material-ui/getting-started/
+- `"uuid": "^11.1.0"` for unique Note ids https://www.npmjs.com/package/uuid
+- `"react-quill-new": "^3.4.6"` to implement and handle the rich-text editor capabilities https://www.npmjs.com/package/react-quill-new
+- `"sass": "^1.87.0"` for css styling 
+
+
 ## Available Scripts
 
 In the project directory, you can run:
