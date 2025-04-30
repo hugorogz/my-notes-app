@@ -5,13 +5,11 @@ import {
   TextField, 
 } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import { Note } from './utils';
+import { Note, notesEndpoint } from './utils';
 import NotesGrid from './components/NotesGrid';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import styles from './styles/NotesForm.module.scss'
-import { testNotes } from './utils';
-
 
 function App() {
   // states for notes, as well as title, description and the editing  note id to identify an existing note
@@ -20,8 +18,23 @@ function App() {
   const [description, setDescription] = useState("");
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
 
-  useEffect(() => {
-    setNotes(testNotes); // to simulate we are importing and setting some notes already created
+  useEffect(() => {// fetch fake notes to populate, by calling a /notes endpoint in Node server
+    const fetchNotes = async () => {
+      try {
+        const response = await fetch(notesEndpoint);
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch notes')
+        }
+
+        const data = await response.text()
+        setNotes(JSON.parse(data));
+      } catch (err) {
+        console.error(`Error fetching the Notes: ${err}`)
+      }
+    }
+
+    fetchNotes();
   }, [])
 
   // function to save changes in both new and existing notes
