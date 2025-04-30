@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { 
-  Button, 
-  TextField, 
-} from '@mui/material';
+
 import { v4 as uuidv4 } from 'uuid';
 import { Note, notesEndpoint } from './utils';
 import NotesGrid from './components/NotesGrid';
-import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import styles from './styles/NotesForm.module.scss'
+import NoteForm from './components/NoteForm';
 
 function App() {
   // states for notes, as well as title, description and the editing  note id to identify an existing note
@@ -78,26 +74,14 @@ function App() {
         My notes app
       </h1>
 
-      <div id="notes-form" className={styles.formContainer}>
-        <TextField 
-          label="Title"
-          value={title}
-          margin="normal"
-          onChange={(event) => setTitle(event.target.value)}
-        />
-        {/* Text area with rich text capabilities, it produces text html tags */}
-        <div className={styles.editor}>
-          <ReactQuill
-            theme="snow"
-            value={description}
-            onChange={setDescription}
-          />
-        </div>
-
-        <Button variant="contained" color="primary" onClick={handleSave}>
-          {editNoteId ? "Save Edited Note" : "Add Note"}
-        </Button>
-      </div>
+      <NoteForm 
+        title={title}
+        description={description}
+        onTitleChange={setTitle}
+        onDescriptionChange={setDescription}
+        onSave={handleSave}
+        editNoteId={editNoteId}
+      />
 
       <NotesGrid 
         notes={notes} 
