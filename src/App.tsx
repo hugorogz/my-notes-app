@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 import { v4 as uuidv4 } from 'uuid';
-import { Note, notesEndpoint } from './utils';
+import { Note } from './utils';
 import NotesGrid from './components/NotesGrid';
 import 'react-quill-new/dist/quill.snow.css';
 import NoteForm from './components/NoteForm';
+import { fetchNotes } from './api/notes';
 
 function App() {
   // states for notes, as well as title, description and the editing  note id to identify an existing note
@@ -15,22 +16,7 @@ function App() {
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
 
   useEffect(() => {// fetch fake notes to populate, by calling a /notes endpoint in Node server
-    const fetchNotes = async () => {
-      try {
-        const response = await fetch(notesEndpoint);
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch notes')
-        }
-
-        const data = await response.text()
-        setNotes(JSON.parse(data));
-      } catch (err) {
-        console.error(`Error fetching the Notes: ${err}`)
-      }
-    }
-
-    fetchNotes();
+    fetchNotes(setNotes);
   }, [])
 
   // function to save changes in both new and existing notes
