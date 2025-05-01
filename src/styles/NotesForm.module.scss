@@ -1,14 +1,14 @@
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: 0 30%;
-  
-    .editor {
-        margin: 1rem 0;
-    }
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 30%;
 
-    Button {
-        margin-right: 1rem;
-    }
+  .editor {
+    margin: 1rem 0;
+  }
+
+  Button {
+    margin-right: 1rem;
+  }
 }

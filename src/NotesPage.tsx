@@ -11,22 +11,19 @@ import { useNavigate } from 'react-router-dom';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, store } from './store';
-import {
-  setNotes,
-  setLoading,
-} from './features/notesSlice';
+import { setNotes, setLoading } from './features/notesSlice';
 
 type AppDispatch = typeof store.dispatch;
 
 function NotesPage() {
   // states for notes, as well as title, description and the editing  note id to identify an existing note
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
   const { notes, loading } = useSelector((state: RootState) => state.notes);
   const dispatch = useDispatch<AppDispatch>();
 
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   // check session storage for the seleted user data from the fake login implemented
   useEffect(() => {
@@ -45,56 +42,57 @@ function NotesPage() {
 
   // function to save changes in both new and existing notes
   const handleSave = async () => {
-    if (editNoteId) { // if there's an id, is a existing note
+    if (editNoteId) {
+      // if there's an id, is a existing note
       const updatedNote = {
         title,
         description,
       };
-      
-      const updatedNotes = await updateNoteAPI(editNoteId, updatedNote);  // API call to update note
+
+      const updatedNotes = await updateNoteAPI(editNoteId, updatedNote); // API call to update note
       dispatch(setNotes(updatedNotes));
-      setEditNoteId(null);  // Reset edit note ID
-    } else {// if not existing then is a new note
+      setEditNoteId(null); // Reset edit note ID
+    } else {
+      // if not existing then is a new note
       const newlyCreatedNote: Note = {
         id: uuidv4(), // use uuid library to create unique ids, pretty wide-used in industry
         title,
         description,
         created_at: new Date().toISOString(),
         updated_at: null,
-      }
+      };
 
       const updatedNotes = await createNoteAPI(newlyCreatedNote);
       dispatch(setNotes(updatedNotes));
     }
 
-    // reset form, potential improvement by using some form observer or html reset 
-    setTitle("");
-    setDescription("")
+    // reset form, potential improvement by using some form observer or html reset
+    setTitle('');
+    setDescription('');
   };
 
   // funtion to enable edition of ax existing note
-  const handleEdit = (note: Note) => {// since is existing al data should be set in current State
+  const handleEdit = (note: Note) => {
+    // since is existing al data should be set in current State
     setEditNoteId(note.id);
     setTitle(note.title);
     setDescription(note.description);
   };
 
   // function to delete
-  const handleDelete = async (id: string) => {
-    const updatedNotes = await deleteNoteAPI(id);
+  const handleDelete = async (editNoteId: string | null) => {
+    const updatedNotes = await deleteNoteAPI(editNoteId);
     dispatch(setNotes(updatedNotes));
   };
 
   return (
     <div>
       {/* from MUI library */}
-      <ResponsiveAppBar /> 
-      
-      <h1 style={{ textAlign: 'center' }}>
-        {editNoteId ? 'Edit Note' : 'Create a Note'}
-      </h1>
+      <ResponsiveAppBar />
 
-      <NoteForm 
+      <h1 style={{ textAlign: 'center' }}>{editNoteId ? 'Edit Note' : 'Create a Note'}</h1>
+
+      <NoteForm
         title={title}
         description={description}
         onTitleChange={setTitle}
@@ -104,14 +102,17 @@ function NotesPage() {
         setEditNoteId={setEditNoteId}
       />
 
-      {loading ? <CircularProgress /> :  <NotesGrid 
-        notes={notes} 
-        handleEdit={handleEdit} 
-        handleDelete={handleDelete} 
-        editNoteId={editNoteId}
-        setEditNoteId={setEditNoteId}
-      />}
-
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <NotesGrid
+          notes={notes}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+          editNoteId={editNoteId}
+          setEditNoteId={setEditNoteId}
+        />
+      )}
     </div>
   );
 }

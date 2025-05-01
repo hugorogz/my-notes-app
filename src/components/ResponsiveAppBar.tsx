@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { 
+import {
   AppBar,
   Container,
   Toolbar,
@@ -17,7 +17,7 @@ const settings = ['Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const user = sessionStorage.getItem('selectedUser') || "";
+  const user = sessionStorage.getItem('selectedUser') || '';
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -48,12 +48,12 @@ function ResponsiveAppBar() {
           >
             Notes app
           </Typography>
-          
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                 {/* use last character in "UserX"  for Avatar letter */}
-                <Avatar alt="">{JSON.parse(user)?.username[4] || "U"}</Avatar> 
+                {/* use last character in "UserX"  for Avatar letter */}
+                <Avatar alt="">{JSON.parse(user)?.username[4] || 'U'}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
