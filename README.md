@@ -13,6 +13,9 @@ Used
 - `"@reduxjs/toolkit": "^2.7.0",` for state management
 
 
+<img width="1478" alt="Screenshot 2025-05-01 at 1 42 00 a m" src="https://github.com/user-attachments/assets/49a84319-4801-4b8e-88e4-6237bcdd01ef" />
+
+
 ## Available Scripts
 
 ### Run `npm install`:
