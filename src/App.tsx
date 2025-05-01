@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-
 import { v4 as uuidv4 } from 'uuid';
 import { Note } from './utils';
 import NotesGrid from './components/NotesGrid';
 import 'react-quill-new/dist/quill.snow.css';
 import NoteForm from './components/NoteForm';
-import { fetchNotes } from './api/notes';
+import { GetNotesByUserId } from './api/notes';
+import { CircularProgress } from '@mui/material';
 
 function App() {
   // states for notes, as well as title, description and the editing  note id to identify an existing note
@@ -14,9 +14,11 @@ function App() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {// fetch fake notes to populate, by calling a /notes endpoint in Node server
-    fetchNotes(setNotes);
+    setIsLoading(true)
+    GetNotesByUserId(setNotes, setIsLoading); // get notes from /notes/:userid endpoint
   }, [])
 
   // function to save changes in both new and existing notes
@@ -70,14 +72,12 @@ function App() {
         editNoteId={editNoteId}
       />
 
-      <NotesGrid 
-        notes={notes.sort((a,b) => {// display notes sorted from most recent to oldest
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        })} 
+      {isLoading ? <CircularProgress /> :  <NotesGrid 
+        notes={notes} 
         handleEdit={handleEdit} 
         handleDelete={handleDelete} 
         editNoteId={editNoteId}
-      />
+      />}
 
     </div>
   );
