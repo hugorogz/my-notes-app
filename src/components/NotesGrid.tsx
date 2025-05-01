@@ -82,7 +82,10 @@ const NotesGrid = React.memo(({
 
         <DeleteNoteConfirm
             isOpen={isOpen}
-            handleCancel={() => setIsOpen(false)}
+            handleCancel={() => {
+                setEditNoteId(null);
+                setIsOpen(false);
+            }}
             handleDelete={() => {
                 handleDelete(editNoteId);
                 setEditNoteId(null);

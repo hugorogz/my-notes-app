@@ -17,13 +17,13 @@ const DeleteNoteConfirm = ({
     return <Modal
         open={isOpen}
         onClose={handleCancel}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"// from MUI docs
+        // aria-labelledby="parent-modal-title"
+        // aria-describedby="parent-modal-description"// from MUI docs
     >
         <div className={styles.deleteConfirm} style={{ width: 600 }}>
-            <h2 id="parent-modal-title">Delete Note?</h2>
+            <h2>Delete Note?</h2>
 
-            <p id="parent-modal-description">
+            <p>
                 Are you sure you want to delete this note?
             </p>
             <Button 
