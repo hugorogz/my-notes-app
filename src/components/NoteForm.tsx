@@ -33,7 +33,7 @@ const NoteForm = ({
             value={title}
             margin="normal"
             onChange={(event) => onTitleChange(event.target.value)}
-            />
+        />
             {/* Text area with rich text capabilities, it produces text html tags */}
             <div className={styles.editor}>
             <ReactQuill
