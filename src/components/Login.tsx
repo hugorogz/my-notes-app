@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import styles from '../styles/Login.module.scss'
 
 type User = {
   id: string;
@@ -51,7 +52,7 @@ const Login = () => {
   if (loading) return <CircularProgress />;
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+    <div style={{ width : 300, margin: '30% auto', display: 'flex', flexDirection: 'column', }}>
       <Typography variant="h4">Select a User</Typography>
 
       <FormControl component="fieldset" style={{ marginTop: '1rem' }}>
