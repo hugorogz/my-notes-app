@@ -5,7 +5,7 @@ import { Note } from './utils';
 import NotesGrid from './components/NotesGrid';
 import 'react-quill-new/dist/quill.snow.css';
 import NoteForm from './components/NoteForm';
-import { GetNotesByUserId } from './api/notes';
+import { createNote, deleteNote, GetNotesByUserId, updateNote } from './api/notes';
 import { CircularProgress } from '@mui/material';
 
 function App() {
@@ -22,11 +22,12 @@ function App() {
   }, [])
 
   // function to save changes in both new and existing notes
-  const handleSave = () => {
+  const handleSave = async () => {
     if (editNoteId) { // if there's an id, is a existing note
-      setNotes((prev) => {
-        return prev.map((note) => note.id === editNoteId ? { ...note, title, description } : note)
-      });
+      const newUpdates = await updateNote(editNoteId, { title, description });
+
+      setNotes(newUpdates);
+
       // once existing note is saved, reset the id
       setEditNoteId(null);
     } else {// if not existing then is a new note
@@ -35,9 +36,10 @@ function App() {
         title,
         description,
         created_at: new Date().toISOString(),
+        updated_at: null,
       }
 
-      setNotes((prev) => [...prev, newlyCreatedNote])
+      await createNote(newlyCreatedNote, setNotes);
     }
 
     // reset form, potential improvement by using some form observer or html reset 
@@ -54,7 +56,7 @@ function App() {
 
   // function to delete
   const handleDelete = (id: string) => {
-    setNotes((prev) => prev.filter((note) => note.id !== id));
+    deleteNote(id, setNotes);
   };
 
   return (

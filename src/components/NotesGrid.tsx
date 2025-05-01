@@ -36,7 +36,9 @@ const NotesGrid = React.memo(({ notes, handleEdit, handleDelete, editNoteId }: N
                         </Typography> */}
                         <CardHeader
                             title={note.title}
-                            subheader={new Date(note.created_at).toLocaleString()}
+                            subheader={note.updated_at 
+                                ? new Date(note.updated_at).toLocaleString()
+                                : new Date(note.created_at).toLocaleString()}
                         />
                         <Typography 
                             component="div" 

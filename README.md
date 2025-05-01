@@ -2,24 +2,29 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Yo need to have previously installed in your system MongoDB
+
 Used 
 - `"@mui/material": "^7.0.2"` for Styled elements and Grid for Notes https://mui.com/material-ui/getting-started/
 - `"uuid": "^11.1.0"` for unique Note ids https://www.npmjs.com/package/uuid
 - `"react-quill-new": "^3.4.6"` to implement and handle the rich-text editor capabilities https://www.npmjs.com/package/react-quill-new
 - `"sass": "^1.87.0"` for css styling 
+- ` "mongoose": "^8.14.1"` for mongo db connection and schemas
 
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`. This will run both UI and Node Express Server
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+Server will run on [http://localhost:8888](http://localhost:8888).
 
 ### `npm test`
 
