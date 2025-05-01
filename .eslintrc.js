@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['warn'],
+    '@typescript-eslint/no-var-requires': 'off',
   },
   settings: {
     react: {

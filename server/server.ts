@@ -1,9 +1,9 @@
-import connectDB from './db';
-import express from 'express';
+const connectDB = require('./db');
+const express = require('express');
 const port = 8888;
-import cors from 'cors';
-import User from './models/User';
-import Note from './models/Note';
+const cors = require('cors');
+const User = require('./models/User');
+const Note = require('./models/Note');
 
 connectDB();
 
