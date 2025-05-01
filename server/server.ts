@@ -145,7 +145,20 @@ app.delete('/notes/:userId/:noteId', async (req, res) => {
       console.error(err);
       res.status(500).send('ServerError');
     }
-  });
+});
+
+  // Endpoint to get users
+app.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({});
+
+        console.log(users)
+        res.json(users);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('ServerError');
+    }
+});
 
 app.listen(port, () => {
     console.log(`Server is now running in http://localhost:${port}`)

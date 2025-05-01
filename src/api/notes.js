@@ -1,9 +1,10 @@
-import { notesEndpoint, userAId } from "../utils";
+import { notesEndpoint, getUserId } from "../utils";
 
 export const GetNotesByUserId = async (setNotes, setIsLoading) => {
     try {
+        const userId = getUserId();
         // hardcoded fetching for UserA for now, to simulate fetching of UserA Notes
-        const response = await fetch(`${notesEndpoint}${userAId}`);
+        const response = await fetch(`${notesEndpoint}${userId}`);
 
         if (!response.ok) {
             throw new Error('Failed to fetch notes')
@@ -20,8 +21,9 @@ export const GetNotesByUserId = async (setNotes, setIsLoading) => {
 }
 
 export const createNote = async (newNote, setNotes) => {
+    const userId = getUserId();
     try {
-      const response = await fetch(`${notesEndpoint}${userAId}`, {
+      const response = await fetch(`${notesEndpoint}${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,8 +44,9 @@ export const createNote = async (newNote, setNotes) => {
   
 
 export const updateNote = async (noteId, updatedData) => {
+    const userId = getUserId();
     try {
-        const response = await fetch(`${notesEndpoint}${userAId}/${noteId}`, {
+        const response = await fetch(`${notesEndpoint}${userId}/${noteId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData),
@@ -62,8 +65,9 @@ export const updateNote = async (noteId, updatedData) => {
 };
 
 export const deleteNote = async (noteId, setNotes) => {
+    const userId = getUserId();
     try {
-      const response = await fetch(`${notesEndpoint}${userAId}/${noteId}`, {
+      const response = await fetch(`${notesEndpoint}${userId}/${noteId}`, {
         method: 'DELETE',
       });
   
@@ -76,4 +80,4 @@ export const deleteNote = async (noteId, setNotes) => {
     } catch (err) {
       console.error(`Error deleting note: ${err}`);
     }
-  };
+};
