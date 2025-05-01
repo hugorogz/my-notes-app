@@ -72,6 +72,7 @@ function App() {
         onDescriptionChange={setDescription}
         onSave={handleSave}
         editNoteId={editNoteId}
+        setEditNoteId={setEditNoteId}
       />
 
       {isLoading ? <CircularProgress /> :  <NotesGrid 
@@ -79,6 +80,7 @@ function App() {
         handleEdit={handleEdit} 
         handleDelete={handleDelete} 
         editNoteId={editNoteId}
+        setEditNoteId={setEditNoteId}
       />}
 
     </div>

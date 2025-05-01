@@ -13,6 +13,7 @@ type NoteFormProps = {
     onDescriptionChange: (value: string) => void;
     onSave: () => void;
     editNoteId: string | null;
+    setEditNoteId: (value: string | null) => void;
 }
 
 const NoteForm = ({
@@ -21,7 +22,8 @@ const NoteForm = ({
     onTitleChange,
     onDescriptionChange,
     onSave,
-    editNoteId
+    editNoteId,
+    setEditNoteId,
 }: NoteFormProps) => {
     return <div id="notes-form" className={styles.formContainer}>
         <TextField 
@@ -39,9 +41,26 @@ const NoteForm = ({
             />
             </div>
 
-            <Button variant="contained" color="primary" onClick={onSave}>
-            {editNoteId ? "Save Edited Note" : "Add Note"}
-            </Button>
+            <div>
+                <Button 
+                    variant="contained"
+                    color="primary" 
+                    onClick={onSave}
+                    disabled={!title && !description}
+                >
+                    {editNoteId ? "Save Edited Note" : "Add Note"}
+                </Button>
+                {editNoteId && <Button 
+                    variant="outlined" 
+                    onClick={() => {
+                        setEditNoteId(null);
+                        onTitleChange("");
+                        onDescriptionChange("");
+                    }}
+                >
+                    Cancel
+                </Button>}
+            </div>
     </div>;
 };
 
