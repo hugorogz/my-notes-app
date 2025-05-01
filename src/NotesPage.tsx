@@ -5,24 +5,28 @@ import { Note } from './utils';
 import NotesGrid from './components/NotesGrid';
 import 'react-quill-new/dist/quill.snow.css';
 import NoteForm from './components/NoteForm';
-import { createNote, deleteNote, GetNotesByUserId, updateNote } from './api/notes';
+import { createNoteAPI, deleteNoteAPI, GetNotesByUserId, updateNoteAPI } from './api/notes';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, store } from './store';
+import {
+  setNotes,
+  setLoading,
+} from './features/notesSlice';
+
+type AppDispatch = typeof store.dispatch;
 
 function NotesPage() {
   // states for notes, as well as title, description and the editing  note id to identify an existing note
-  const [notes, setNotes] = useState<Note[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [editNoteId, setEditNoteId] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate()
+  const { notes, loading } = useSelector((state: RootState) => state.notes);
+  const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {// fetch fake notes to populate, by calling a /notes endpoint in Node server
-    setIsLoading(true)
-    GetNotesByUserId(setNotes, setIsLoading); // get notes from /notes/:userid endpoint
-  }, [])
+  const navigate = useNavigate();  
 
   // check session storage for the seleted user data from the fake login implemented
   useEffect(() => {
@@ -30,18 +34,26 @@ function NotesPage() {
     if (!stored) {
       // if no selected User we go to loginPage
       navigate('/');
+    } else {
+      // fetch fake notes to populate, by calling a /notes endpoint in Node server
+      dispatch(setLoading(true));
+      GetNotesByUserId()
+        .then((fetchedNotes) => dispatch(setNotes(fetchedNotes)))
+        .finally(() => dispatch(setLoading(false)));
     }
-  }, [navigate]);
+  }, [dispatch, navigate]);
 
   // function to save changes in both new and existing notes
   const handleSave = async () => {
     if (editNoteId) { // if there's an id, is a existing note
-      const newUpdates = await updateNote(editNoteId, { title, description });
-
-      setNotes(newUpdates);
-
-      // once existing note is saved, reset the id
-      setEditNoteId(null);
+      const updatedNote = {
+        title,
+        description,
+      };
+      
+      const updatedNotes = await updateNoteAPI(editNoteId, updatedNote);  // API call to update note
+      dispatch(setNotes(updatedNotes));
+      setEditNoteId(null);  // Reset edit note ID
     } else {// if not existing then is a new note
       const newlyCreatedNote: Note = {
         id: uuidv4(), // use uuid library to create unique ids, pretty wide-used in industry
@@ -51,7 +63,8 @@ function NotesPage() {
         updated_at: null,
       }
 
-      await createNote(newlyCreatedNote, setNotes);
+      const updatedNotes = await createNoteAPI(newlyCreatedNote);
+      dispatch(setNotes(updatedNotes));
     }
 
     // reset form, potential improvement by using some form observer or html reset 
@@ -67,8 +80,9 @@ function NotesPage() {
   };
 
   // function to delete
-  const handleDelete = (id: string) => {
-    deleteNote(id, setNotes);
+  const handleDelete = async (id: string) => {
+    const updatedNotes = await deleteNoteAPI(id);
+    dispatch(setNotes(updatedNotes));
   };
 
   return (
@@ -90,7 +104,7 @@ function NotesPage() {
         setEditNoteId={setEditNoteId}
       />
 
-      {isLoading ? <CircularProgress /> :  <NotesGrid 
+      {loading ? <CircularProgress /> :  <NotesGrid 
         notes={notes} 
         handleEdit={handleEdit} 
         handleDelete={handleDelete} 

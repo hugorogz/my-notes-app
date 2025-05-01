@@ -10,6 +10,7 @@ Used
 - `"react-quill-new": "^3.4.6"` to implement and handle the rich-text editor capabilities https://www.npmjs.com/package/react-quill-new
 - `"sass": "^1.87.0"` for css styling 
 - `"mongoose": "^8.14.1"` for mongo db connection and schemas
+- `"@reduxjs/toolkit": "^2.7.0",` for state management
 
 
 ## Available Scripts

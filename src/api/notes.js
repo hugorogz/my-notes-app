@@ -1,26 +1,22 @@
 import { notesEndpoint, getUserId } from "../utils";
 
-export const GetNotesByUserId = async (setNotes, setIsLoading) => {
+export const GetNotesByUserId = async () => {
     try {
         const userId = getUserId();
-        // hardcoded fetching for UserA for now, to simulate fetching of UserA Notes
         const response = await fetch(`${notesEndpoint}${userId}`);
 
         if (!response.ok) {
             throw new Error('Failed to fetch notes')
         }
 
-        const data = await response.json();
-
-        setNotes(data);
+        const notes = await response.json();
+        return notes;
     } catch (err) {
         console.error(`Error fetching the Notes: ${err}`)
-    } finally {
-        setIsLoading(false);
     }
 }
 
-export const createNote = async (newNote, setNotes) => {
+export const createNoteAPI = async (newNote) => {
     const userId = getUserId();
     try {
       const response = await fetch(`${notesEndpoint}${userId}`, {
@@ -36,14 +32,14 @@ export const createNote = async (newNote, setNotes) => {
       }
   
       const updatedNotes = await response.json();
-      setNotes(updatedNotes);
+      return updatedNotes;
     } catch (err) {
       console.error(`Error creating note: ${err}`);
     }
   };
   
 
-export const updateNote = async (noteId, updatedData) => {
+export const updateNoteAPI = async (noteId, updatedData) => {
     const userId = getUserId();
     try {
         const response = await fetch(`${notesEndpoint}${userId}/${noteId}`, {
@@ -56,15 +52,14 @@ export const updateNote = async (noteId, updatedData) => {
             throw new Error('Failed to update this Note')
         }
     
-        const data = await response.json();
-
-        return data;
+        const updatedNotes = await response.json();
+        return updatedNotes;
     } catch(err) {
         console.error(`Error Updating this Note`);
     }
 };
 
-export const deleteNote = async (noteId, setNotes) => {
+export const deleteNoteAPI = async (noteId) => {
     const userId = getUserId();
     try {
       const response = await fetch(`${notesEndpoint}${userId}/${noteId}`, {
@@ -76,7 +71,7 @@ export const deleteNote = async (noteId, setNotes) => {
       }
   
       const updatedNotes = await response.json();
-      setNotes(updatedNotes);
+      return updatedNotes;
     } catch (err) {
       console.error(`Error deleting note: ${err}`);
     }

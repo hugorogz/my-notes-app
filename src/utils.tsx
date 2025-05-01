@@ -7,6 +7,12 @@ export interface Note {
   updated_at: string | null;
 };
 
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+};
+
 export const notesEndpoint = 'http://localhost:8888/notes/';
 
 export const getUserId = () => {

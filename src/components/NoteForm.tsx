@@ -25,6 +25,8 @@ const NoteForm = ({
     editNoteId,
     setEditNoteId,
 }: NoteFormProps) => {
+    const isDescriptionEmpty = description.trim() === '' || description === '<p><br></p>';
+
     return <div id="notes-form" className={styles.formContainer}>
         <TextField 
             label="Title"
@@ -46,7 +48,7 @@ const NoteForm = ({
                     variant="contained"
                     color="primary" 
                     onClick={onSave}
-                    disabled={!title && !description}
+                    disabled={!title.trim() && isDescriptionEmpty}
                 >
                     {editNoteId ? "Save Edited Note" : "Add Note"}
                 </Button>

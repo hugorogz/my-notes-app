@@ -53,7 +53,7 @@ function ResponsiveAppBar() {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                  {/* use last character in "UserX"  for Avatar letter */}
-                <Avatar alt="">{JSON.parse(user)?.username[4]}</Avatar> 
+                <Avatar alt="">{JSON.parse(user)?.username[4] || "U"}</Avatar> 
               </IconButton>
             </Tooltip>
             <Menu
