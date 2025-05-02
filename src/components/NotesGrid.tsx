@@ -28,7 +28,7 @@ const NotesGrid = React.memo(
     return (
       <div id="notes-container" className={styles.notesContainer}>
         <Grid container spacing={2}>
-          {notes.map((note) => (
+          {notes?.map((note) => (
             <Grid key={note.id} size={4}>
               <Card
                 className={styles.noteCard}

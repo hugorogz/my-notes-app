@@ -4,6 +4,7 @@ export interface Note {
   description: string;
   created_at: string;
   updated_at: string | null;
+  userAccess: (string | null)[];
 }
 
 export type User = {
