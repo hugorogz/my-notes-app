@@ -2,11 +2,22 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+<img width="1080" alt="Screenshot 2025-05-01 at 1 42 00 a m" src="https://github.com/user-attachments/assets/49a84319-4801-4b8e-88e4-6237bcdd01ef" />
+
 ## To install/run this Notes App:
 
 - You need to have previously installed in your system MongoDB
-- Run `npm i` in root to install react app packages
-- Run `npm i` in `cd server` to install Node/Express packages
+- Run `npm i` in root directory to install react app packages
+- `cd server` to access server directory
+- Run `npm i` in `server` to install Node/Express packages
+
+Before start, since we are using mock data to simulate a Login/User selection:
+- in `server` root run `node seed.js`
+
+This will insert mock data in the database, this includes 2 users, 10 UserA notes, 3 UserB notes. 
+Two of the UserA Notes are shared to UserB so you should see 4 of them for UserB
+
+Now, run the whole setup:
 - Run `npm run start` to run both react app and node server
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - Server will run on [http://localhost:8888](http://localhost:8888).
@@ -27,7 +38,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - `"@reduxjs/toolkit": "^2.7.0"` for state management
 - `"socket.io": "^4.8.1"` for real time collab (CURRENTLY NOT WORKING)
 
-<img width="1478" alt="Screenshot 2025-05-01 at 1 42 00 a m" src="https://github.com/user-attachments/assets/49a84319-4801-4b8e-88e4-6237bcdd01ef" />
 
 ### `npm run build`
 
