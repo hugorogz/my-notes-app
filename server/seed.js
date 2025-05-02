@@ -27,6 +27,7 @@ const testNotes = [
     created_at: "2025-04-28T22:26:41.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [`${users[1].id}`] // incluimos a UserA en userAccess, lo que significa que esta es una nota compartida de UserA con UserB
   },
   {
     id: uuidv4(),
@@ -35,6 +36,7 @@ const testNotes = [
     created_at: "2025-04-28T21:15:30.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [`${users[1].id}`] // incluimos a UserA en userAccess, lo que significa que esta es una nota compartida de UserA con UserB
   },
   {
     id: uuidv4(),
@@ -43,6 +45,7 @@ const testNotes = [
     created_at: "2025-04-28T20:03:15.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -51,6 +54,7 @@ const testNotes = [
     created_at: "2025-04-28T18:48:22.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -59,6 +63,7 @@ const testNotes = [
     created_at: "2025-04-28T17:37:11.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -67,6 +72,7 @@ const testNotes = [
     created_at: "2025-04-28T16:24:05.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -75,6 +81,7 @@ const testNotes = [
     created_at: "2025-04-28T15:10:50.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -83,6 +90,7 @@ const testNotes = [
     created_at: "2025-04-28T14:02:31.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -91,6 +99,7 @@ const testNotes = [
     created_at: "2025-04-28T12:48:19.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -99,6 +108,7 @@ const testNotes = [
     created_at: "2025-04-28T11:32:44.236Z",
     updated_at: null,
     userId: users[0].id, // Asociamos la nota con UserA
+    userAccess: [] // Esta es una nota NO compartida
   },
   // Notas de UserB
   {
@@ -108,6 +118,7 @@ const testNotes = [
     created_at: "2025-04-28T09:00:00.000Z",
     updated_at: null,
     userId: users[1].id, // Asociamos la nota con UserB
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -116,6 +127,7 @@ const testNotes = [
     created_at: "2025-04-28T08:15:00.000Z",
     updated_at: null,
     userId: users[1].id, // Asociamos la nota con UserB
+    userAccess: [] // Esta es una nota NO compartida
   },
   {
     id: uuidv4(),
@@ -124,6 +136,7 @@ const testNotes = [
     created_at: "2025-04-28T07:45:00.000Z",
     updated_at: null,
     userId: users[1].id, // Asociamos la nota con UserB
+    userAccess: [] // Esta es una nota NO compartida
   }
 ];
 
@@ -134,9 +147,9 @@ async function insertUsersAndNotes() {
 
     const db = client.db(dbName);
 
-    // // Insertamos los usuarios
-    // const usersCollection = db.collection('users');
-    // await usersCollection.insertMany(users);
+    // Insertamos los usuarios
+    const usersCollection = db.collection('users');
+    await usersCollection.insertMany(users);
 
     // Insertamos las notas asociadas a cada usuario
     const notesCollection = db.collection('notes');
