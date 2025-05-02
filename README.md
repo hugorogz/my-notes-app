@@ -12,7 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Run `npm i` in `server` to install Node/Express packages
 
 Before start, since we are using mock data to simulate a Login/User selection:
-- in `server` root run `node seed.js`
+- in `server` root, run this: `node seed.js`
 
 This will insert mock data in the database, this includes 2 users, 10 UserA notes, 3 UserB notes. 
 Two of the UserA Notes are shared to UserB so you should see 4 of them for UserB
