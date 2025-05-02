@@ -79,7 +79,7 @@ function NotesPage() {
       const updatedNote = {
         title,
         description,
-        userAccess
+        userAccess: sharedWithUserId ? [sharedWithUserId] : []
       };
 
       const updatedNotes = await updateNoteAPI(editNoteId, updatedNote); // API call to update note
@@ -94,7 +94,7 @@ function NotesPage() {
         description,
         created_at: new Date().toISOString(),
         updated_at: null,
-        userAccess: [sharedWithUserId]
+        userAccess: sharedWithUserId ? [sharedWithUserId] : []
       };
 
       const updatedNotes = await createNoteAPI(newlyCreatedNote);
@@ -106,6 +106,7 @@ function NotesPage() {
     setDescription('');
     setUserAccess([]);
     setEditNoteId(null);
+    setSharedWithUserId(null);
   };
 
   // funtion to enable edition of ax existing note
@@ -115,6 +116,7 @@ function NotesPage() {
     setTitle(note.title);
     setDescription(note.description);
     setUserAccess(note.userAccess)
+    setSharedWithUserId(note.userAccess[0] || null);
   };
 
   // function to delete
