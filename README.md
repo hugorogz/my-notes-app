@@ -2,38 +2,32 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Yo need to have previously installed in your system MongoDB
+## To install/run this Notes App:
 
-Used
+- You need to have previously installed in your system MongoDB
+- Run `npm i` in root to install react app packages
+- Run `npm i` in `cd server` to install Node/Express packages
+- Run `npm run start` to run both react app and node server
+- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Server will run on [http://localhost:8888](http://localhost:8888).
+
+## Other available scripts
+- `npm run test` to run Jest test suites
+- `npm run lint` to run eslint
+- `npm run format` for prettier formating
+
+
+## Some important libraries used
 
 - `"@mui/material": "^7.0.2"` for Styled elements and Grid for Notes https://mui.com/material-ui/getting-started/
 - `"uuid": "^11.1.0"` for unique Note ids https://www.npmjs.com/package/uuid
 - `"react-quill-new": "^3.4.6"` to implement and handle the rich-text editor capabilities https://www.npmjs.com/package/react-quill-new
 - `"sass": "^1.87.0"` for css styling
 - `"mongoose": "^8.14.1"` for mongo db connection and schemas
-- `"@reduxjs/toolkit": "^2.7.0",` for state management
+- `"@reduxjs/toolkit": "^2.7.0"` for state management
+- `"socket.io": "^4.8.1"` for real time collab (CURRENTLY NOT WORKING)
 
 <img width="1478" alt="Screenshot 2025-05-01 at 1 42 00 a m" src="https://github.com/user-attachments/assets/49a84319-4801-4b8e-88e4-6237bcdd01ef" />
-
-## Available Scripts
-
-### Run `npm install`:
-
-- In the root `my-notes-app` to install React App packages
-- in `cd server` to install Node/Express packages
-
-### In the root run `npm run start`:
-
-- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-- Server will run on [http://localhost:8888](http://localhost:8888).
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
