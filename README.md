@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <img width="1080" alt="Screenshot 2025-05-01 at 1 42 00 a m" src="https://github.com/user-attachments/assets/49a84319-4801-4b8e-88e4-6237bcdd01ef" />
 
+
 Apart from the React app (UI), I've decided to also mock a server to better illustrate the architechture I would follow for a project like this instead of just using mocked data in localStore. I think this approach would be really good in terms of creating a POC so both backend and frontend part of the picture can be illustrated in early development stages of a project like this one.
 
 ## To install/run this Notes App:
